@@ -1,0 +1,86 @@
+<nav class="navbar navbar-expand-lg" style="background-color: #52ad80;">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav w-100">
+      <li class="nav-item">
+        <p><i class="fa fa-user"></i> {{staff.firstName}} {{staff.lastName}}</p>
+      </li>
+      <li class="nav-item ml-auto">
+        <a class="btn btn-danger" (click)="logout()">Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<main role="main">
+  <section class="jumbotron text-center">
+    <div class="container">
+      <div class="row mb-5">
+        <div class="col-md-4">
+          <div class="card border-success">
+            <div class="card-body h3">
+             {{staff.status.totalLeaves}}
+            </div>
+            <div class="card-footer h5">
+             Total Leaves
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card border-success">
+            <div class="card-body h3">
+              {{staff.status.approved}}
+            </div>
+            <div class="card-footer h5">
+            Approved
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card border-success">
+            <div class="card-body h3">
+              {{staff.status.rejected}}
+            </div>
+            <div class="card-footer h5">
+              Rejected
+            </div>
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary ml-auto" data-toggle="modal" data-target="#leaveModal">
+        <i class="fa fa-plus" aria-hidden="true"></i> Apply Leave</button>
+    </div>
+  </section>
+  <div class="album py-5 bg-light">
+    <div class="container">
+      <div class="row" *ngIf="isLeave; else noLeave">
+        <div class="col-md-4" *ngFor="let leave of staffLeave">
+          <div class="card mb-4 box-shadow">
+            <div class="card-header h4">
+              Leave For {{leave.startDate}}
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Number of days :
+               {{leave.noOfDays}}
+              </h5>
+              <h5 class="card-text">Reason :
+                {{leave.reason}}
+              </h5>
+              <h5 class="card-text">Status :
+                {{leave.status}}
+              </h5>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <ng-template #noLeave>
+          <h2 class="text-center text-danger"> Not applied for any Leave yet!</h2>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+
+</main>
+<app-leave-form></app-leave-form>

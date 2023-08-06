@@ -1,0 +1,44 @@
+<header>
+  <nav class="navbar navbar-expand-lg" style="background-color: #74a9db;">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav  w-100">
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link font-weight-bold" routerLink="/hod">Head Of Department</a>
+        </li>
+        <li class="nav-item ml-auto">
+          <a class="btn btn-danger" (click)="logout()">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
+<main role="main">
+  <div class="album py-5">
+    <div class="container">
+      <div class="row" *ngIf="content.length; else noLeaves">
+          <div class="col-md-3" *ngFor="let sLeave of content; index as  i">
+            <div class="card mb-4 box-shadow">
+              <div class="card-header h4">
+             <h4>{{sLeave.fName}} {{sLeave.lName}}</h4>
+              </div>
+              <div class="card-body">
+                <p class="card-text"><strong>Leave For : </strong> {{sLeave.startDate}}</p>
+                <p class="card-text"><strong>Number of Days : </strong> {{sLeave.noOfDays}}</p>
+                <p class="card-text"><strong>Reason : </strong> {{sLeave.reason}}</p>
+                <div>
+                  <button type="submit" class="btn btn-md btn-success px-3 mr-4" (click)="onApprove(sLeave.leaveId, sLeave.staffId, i)">Approve</button>
+                  <button type="submit" class="btn btn-md btn-danger px-3" (click)="onReject(sLeave.leaveId, sLeave.staffId, i)">Reject</button>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+      <ng-template #noLeaves>
+        <h4 class="text-danger text-center mt-5">No Leave Request Available</h4>
+      </ng-template>
+    </div>
+  </div>
+</main>

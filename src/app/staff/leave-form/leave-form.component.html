@@ -1,0 +1,40 @@
+
+
+<div class="modal fade" id="leaveModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Leave Form</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="leaveForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="startDate">From :</label>
+            <input type="date" class="form-control" id="startDate"  name="start" formControlName="start">
+            <span class="text-danger" *ngIf="!leaveForm.get('start').valid && leaveForm.get('start').touched">start date  is required</span>
+          </div>
+          <div class="form-group">
+            <label for="endDate">To :</label>
+            <input type="date" class="form-control" id="endDate"  name="end" formControlName="end">
+            <span class="text-danger" *ngIf="!leaveForm.get('end').valid && leaveForm.get('end').touched">First Name is required</span>
+          </div>
+          <div class="form-group">
+            <label for="reason">Reason :</label>
+            <textarea type="text" class="form-control" id="reason" name="reason" formControlName="reason"></textarea>
+            <span class="text-danger" *ngIf="!leaveForm.get('reason').valid && leaveForm.get('reason').touched">
+              <ng-container *ngIf="leaveForm.get('reason').errors.required">
+                *Reason is required
+              </ng-container>
+            </span>
+          </div>
+          <button type="submit" class="btn btn-success mr-1" [disabled]="!leaveForm.valid">Submit</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
